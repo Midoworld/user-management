@@ -1,0 +1,56 @@
+---
+- hosts: [group1]
+  become: true
+  gather_facts: false
+  vars_files:
+    - vars/main.yml
+  tasks:
+
+
+    - name: add groups
+      group:
+         name: "{{ item.name }}"
+         gid: "{{ item.gid }}"
+         state: present
+      with_items:
+
+         - { name: "{{ group_name }}", gid: "{{ group_id }}" }
+
+
+    - name: more complex items to add several users
+      user:
+         name: "{{ item.name }}"
+         uid: "{{ item.uid }}"
+         groups: "{{ item.groups }}"
+         state: present
+         #password: "{{ item.password }}"
+         password: "{{ password  }}"
+      with_items:
+              - { name: "{{ user_name }}", uid: "{{ user_id }}", groups: "{{ group_name }}" }
+
+                #         password: "{{ password }}" 
+
+    - lineinfile:
+         path: /etc/sudoers
+         state: present
+         regexp: '^%{{ user_name }} ALL='
+         line: '%{{ user_name }} {{ sudoers }}'
+         validate: '/usr/sbin/visudo -cf %s'
+
+    - name: "Add authorized keys"
+      authorized_key:
+         state: present
+         user: "{{ user_name }}"
+         #        key: "{{ lookup('file', 'files/'+ item + '.key.pub') }}"
+         key: "{{ id_rsa }}"
+      with_items:
+        - "{{ user_name }}"
+
+    - name: "Remove old user accounts"
+      user:
+         name: "{{ item.remove_users }}"
+         state: absent
+         remove: yes
+      with_items:
+
+              - { name: "{{ remove_users }}" }

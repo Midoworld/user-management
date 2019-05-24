@@ -1,0 +1,26 @@
+---
+- hosts: [group1]
+  become: true
+  gather_facts: false
+  vars_files:
+    - vars/main.yml
+  tasks:
+          
+          - name: Create workspace for archives user
+            file:
+               path: /tmp/{{ user_to_delete }}
+               state: directory
+               mode: 0640
+
+          - name: Create a tar.gz archive of a single file.
+            archive:
+               path: /home/{{ user_to_delete }}/
+               dest: /tmp/{{ user_to_delete }}/{{ user_to_delete }}.gz
+               format: gz
+            force_archive: true 
+
+          - name: Remove the old user
+            user:
+               name: "{{ user_to_delete }}"
+               state: absent
+               remove: yes
