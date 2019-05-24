@@ -1,15 +1,15 @@
 ---
 # vars file for common
 # Add user vm4 in group devops
-group_name: devops3
-user_name: devops3
-group_id: 3004
-user_id: 8004
+group_name: devops5
+user_name: devops5
+group_id: 3005
+user_id: 8005
 id_rsa: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC30hIwRsd9MPy9Er4d+vp3iCN0ZOuIzlvwIlSEPpSzop3P1ZdV3dqFtm2/C1Rcudds6gMCQlCQxRavnPXhQY840GyfUWJJ8nyZ2rcaMJkV9dycGWXMIjGzfBKfYHlllxaL9LwxeyPYuS6RyFoobD18c6+JyiWzA1nH6jBmuMix1Lf2TGAh+3eb6Sw1CWF37ONcJWqkKIvYhBREC3rXxDO7DkhSy9W45Hmy3LUNMhxA9ugzTTOuQe/xlUFMx9p5yR2rJCNLqrxw/nxW9wcETxM821CAk88HgzQoSXtNIuUxcNWTPqtLcG0JQ7+EwXbTG71xiJGlgXMSItices1zCopV deploy@VM-ANSIBLE-SMZ
 
 #sudoers: "ALL=(ALL)  NOPASSWD: ALL"      # or  "ALL=(ALL) ALL"
 sudoers: "ALL=(ALL) ALL"
 password: ""
-remove_users: devops3
-user_to_delete: devops3
+remove_users: devops5
+user_to_delete: devops5
 version: 0.1

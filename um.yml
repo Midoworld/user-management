@@ -46,11 +46,3 @@
       with_items:
         - "{{ user_name }}"
 
-    - name: "Remove old user accounts"
-      user:
-         name: "{{ item.remove_users }}"
-         state: absent
-         remove: yes
-      with_items:
-
-              - { name: "{{ remove_users }}" }
