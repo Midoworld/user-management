@@ -16,4 +16,3 @@ else
         echo 'No Action for USER '$U' ';
 fi
 done
-~      
